@@ -9,10 +9,8 @@
   <style>
     body {
       background-color: #00acee;
-      /* Twitter blue */
-      color: white;
       text-align: center;
-      font-family: Arial, sans-serif;
+      font-family: 'Open Sans', sans-serif;
     }
 
     #quote-box {
@@ -22,15 +20,70 @@
       background-color: white;
       border-radius: 10px;
     }
+
+    #quote-box #text {
+      font-size: 2em;
+    }
+
+    #new-quote,
+    #tweet-button {
+      padding: 15px 30px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    #new-quote {
+      background-color: #00acee;
+      color: white;
+      border: none;
+    }
+
+    #tweet-button {
+      background-color: #00acee;
+      color: white;
+      border: none;
+    }
   </style>
 </head>
 
 <body>
   <div id="quote-box">
     <p id="text"></p>
-    <p id="author"></p>
     <button id="new-quote">New Quote</button>
+    <button id="tweet-button">Tweet</button>
   </div>
+  <script>
+    const quotes = [
+      {
+        text: "There is no great genius without some degree of anger.",
+      },
+      {
+        text: "I can't change the direction of the wind, but I can adjust my sails to always reach my destination.",
+      }
+    ];
+
+
+    const quoteBox = document.getElementById("quote-box");
+    const text = document.getElementById("text");
+    const newQuote = document.getElementById("new-quote");
+
+    function generateQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      text.innerText = quotes[randomIndex].text;
+    }
+    newQuote.addEventListener("click", generateQuote);
+    generateQuote();
+  </script>
+  <script>
+    const tweetButton = document.getElementById("tweet-button");
+    tweetButton.addEventListener("click", function () {
+      const quote = document.getElementById("text").innerText;
+      const tweetUrl = `https://twitter.com/intent/tweet?text=${quote}`;
+      window.open(tweetUrl);
+    });
+  </script>
 </body>
 
 </html>
